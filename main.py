@@ -2,7 +2,7 @@ import torch
 from BigMM.mm import BIGmm
 import time
 
-a = torch.ones([1000, 1000]).float() 
+a = torch.ones([1000, 1000]).float()
 
 b = BIGmm(a, a, [97, 97])
 
