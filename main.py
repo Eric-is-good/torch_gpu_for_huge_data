@@ -2,14 +2,21 @@ import torch
 from BigMM.mm import BIGmm
 import time
 
-a = torch.ones([1000, 1000]).float()
+print("test begin")
 
-b = BIGmm(a, a, [97, 97])
+time1 = time.time()
+a = torch.ones([40000, 40000]).float()
+time2 = time.time()
+print(time2 - time1)
 
-c = torch.mm(a, a)
-print(c)
+b = BIGmm(a, a, [10000, 20000], gpu_ids=[0, 1])
+time3 = time.time()
+print("time is:", time3 - time2)
 
-d = torch.sum(torch.abs(c - b) > 0.0001)
+# c = torch.mm(a.cuda(0), a.cuda(0)).cpu()  # 子模块 3.3 s
+# time4 = time.time()
+#
+# print(time4 - time3)
 
-print(d)
-
+# d = torch.sum(torch.abs(c - b) > 0.01)
+# print(d)
